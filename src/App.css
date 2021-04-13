@@ -1,0 +1,9 @@
+
+
+.card .img_active{
+    transition: transform 0.5s ease-in-out;
+}
+.card .img_active:hover{
+    opacity: 0.6;
+    transform: scale(1.02);
+}
