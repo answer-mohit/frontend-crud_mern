@@ -2,7 +2,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router';
 import { AppContext } from './context';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure()
 function Edit() {
 const {id}=useParams();
 const history=useHistory()
@@ -28,10 +31,13 @@ const submitHandler=async(e)=>{
 e.preventDefault();
 const savedata=await axios.put(`/update/${id}`,{title,body});
 if(savedata){
-    alert('your data updated successfully');
+    toast.info('your data updated successfully',{position:toast.POSITION.TOP_CENTER,autoClose:5000});
+    // alert('your data updated successfully');
     history.push('/');
 }
 else{
+    toast.error('your data not updated',{position:toast.POSITION.TOP_CENTER,autoClose:5000});
+
     alert('data not updated');
 }
 }

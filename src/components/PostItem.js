@@ -3,14 +3,24 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import {FiEdit} from 'react-icons/fi';
 import {FaTrashRestoreAlt} from 'react-icons/fa';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "../App.css";
+
+
+toast.configure();
 function PostItem({_id,title,body}) {
   const deleteHandler=async()=>{
 const result=await axios.delete(`/delete/${_id}`);
 if(result){
-    alert('you data deleted succesfully');
-    window.location.reload();
+  toast.success('your data deleted succesfully',{position:toast.POSITION.TOP_CENTER,autoClose:false})
+setTimeout(()=>{
+  window.location.reload();
+
+},2000)  
 }else{
+  toast.error('your data not deleted succesfully',{position:toast.POSITION.TOP_CENTER})
+
   alert('data not deleted');
 }
 }

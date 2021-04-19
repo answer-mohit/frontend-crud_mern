@@ -1,7 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useHistory } from 'react-router';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure();
 function AddPost() {
     const history=useHistory();
 const [title,setTitle]=useState('');
@@ -10,7 +13,8 @@ const adddPostHandler=async(e)=>{
     e.preventDefault();
   const result=await axios.post(`/add`,{title,body});
   if(result){
-      alert('your data save successfully');
+    toast.success('your data save successfully',{position:toast.POSITION.TOP_CENTER,autoClose:5000});
+      // alert('your data save successfully');
       history.push("/");
   }else{
       alert('data not save');

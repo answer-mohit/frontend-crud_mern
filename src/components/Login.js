@@ -1,7 +1,10 @@
 import React,{useState} from 'react';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure();
 function Login() {
     const history=useHistory();
     const [email,setEmail]=useState('');
@@ -13,12 +16,14 @@ function Login() {
             email,password
         });
         if(result){
-            alert('you are login successfully');
+            toast.success('you are login successfully',{position:toast.POSITION.TOP_CENTER})
+            // alert('you are login successfully');
             history.push('/');
-    window.location.reload();
+    // window.location.reload();
 
         }else{
-            alert('invalid user details');
+            toast.error('plaese create your account');
+            // alert('invalid user details');
         }
     } 
     return (

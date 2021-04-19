@@ -1,7 +1,10 @@
 import React,{useState} from 'react'
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure();
 function Signup() {
     const history=useHistory();
     const [name,setname]=useState('');
@@ -22,12 +25,15 @@ const closeModel=()=>{
             name,email,password,passwordVerify
         });
         if(result){
-            alert('your account created successfully');
+            toast.success('your account created successfully',{position:toast.POSITION.TOP_CENTER})
+            // alert('your account created successfully');
             history.push('/');
-    window.location.reload();
+    // window.location.reload();
             
         }else{
-            alert('invalid user details');
+            toast.error('your account not created !!')
+
+            // alert('invalid user details');
         }
     } 
     return (
